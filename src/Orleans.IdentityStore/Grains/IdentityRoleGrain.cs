@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Orleans.IdentityStore.Grains
@@ -171,7 +172,7 @@ namespace Orleans.IdentityStore.Grains
             return Task.FromResult<IList<Guid>>(_data.State.Users.ToList());
         }
 
-        public override Task OnActivateAsync()
+        public override Task OnActivateAsync(CancellationToken cancellationToken)
         {
             _id = this.GetPrimaryKey();
             return Task.CompletedTask;
@@ -223,10 +224,16 @@ namespace Orleans.IdentityStore.Grains
         }
     }
 
+    [GenerateSerializer]
     internal class RoleGrainState<TRole>
     {
+        [Id(0)]
         public List<IdentityRoleClaim<Guid>> Claims { get; set; } = new List<IdentityRoleClaim<Guid>>();
+
+        [Id(1)]
         public TRole Role { get; set; }
+
+        [Id(2)]
         public HashSet<Guid> Users { get; set; } = new HashSet<Guid>();
     }
 }

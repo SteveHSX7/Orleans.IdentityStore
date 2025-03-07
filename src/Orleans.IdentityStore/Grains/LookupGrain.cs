@@ -74,8 +74,10 @@ namespace Orleans.IdentityStore.Grains
         }
     }
 
+    [GenerateSerializer]
     internal class LookupGrainState
     {
+        [Id(0)]
         public Dictionary<string, Guid> Index { get; set; } = new Dictionary<string, Guid>();
     }
 }
