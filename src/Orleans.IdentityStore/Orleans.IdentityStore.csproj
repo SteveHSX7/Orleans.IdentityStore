@@ -5,7 +5,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />		
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+		<PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="9.1.2" />
+		<PackageReference Include="Microsoft.Orleans.Serialization.SystemTextJson" Version="9.1.2" />		
 		<PackageReference Include="Microsoft.Orleans.Server" Version="9.1.2" />
 		<PackageReference Include="Microsoft.Orleans.Sdk" Version="9.1.2" />
 	</ItemGroup>

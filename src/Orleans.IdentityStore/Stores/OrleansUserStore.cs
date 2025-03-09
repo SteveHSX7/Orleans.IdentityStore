@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Orleans.IdentityStore.Grains;
+using Orleans.IdentityStore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

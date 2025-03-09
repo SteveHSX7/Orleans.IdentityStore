@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Orleans.IdentityStore;
-using Orleans.IdentityStore.Grains;
+using Orleans.IdentityStore.Interfaces;
 
 namespace Orleans
 {

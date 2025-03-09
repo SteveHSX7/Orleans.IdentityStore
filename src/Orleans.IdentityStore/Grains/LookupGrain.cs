@@ -1,33 +1,18 @@
-﻿using Orleans;
-using Orleans.Concurrency;
-using Orleans.Runtime;
+﻿using Orleans.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Orleans.IdentityStore.Interfaces;
 
 namespace Orleans.IdentityStore.Grains
 {
-    internal interface ILookupGrain : IGrainWithStringKey
-    {
-        Task<bool> AddOrUpdate(string value, Guid grainKey);
-
-        Task Delete(string value);
-
-        Task DeleteIfMatch(string value, Guid grainKey);
-
-        [AlwaysInterleave]
-        Task<Guid?> Find(string value);
-
-        [AlwaysInterleave]
-        Task<IReadOnlyDictionary<string, Guid>> GetAll();
-    }
-
     internal class LookupGrain : Grain, ILookupGrain
     {
         private readonly IPersistentState<LookupGrainState> _index;
 
         public LookupGrain(
-            [PersistentState(nameof(LookupGrainState), OrleansIdentityConstants.OrleansStorageProvider)] IPersistentState<LookupGrainState> index)
+            [PersistentState(nameof(LookupGrainState), OrleansIdentityConstants.OrleansStorageProvider)] 
+            IPersistentState<LookupGrainState> index)
         {
             _index = index;
         }

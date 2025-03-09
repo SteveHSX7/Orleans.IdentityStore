@@ -1,38 +1,19 @@
-﻿using Orleans.Concurrency;
-using Orleans.Runtime;
+﻿using Orleans.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Orleans.IdentityStore.Interfaces;
 
 namespace Orleans.IdentityStore.Grains
 {
-    /// <summary>
-    /// Identity claim grain
-    /// </summary>
-    public interface IIdentityClaimGrain : IGrainWithStringKey
-    {
-        /// <summary>
-        /// Get the users who have this claim
-        /// </summary>
-        /// <returns>The users have have claim</returns>
-        [AlwaysInterleave]
-        Task<IList<Guid>> GetUserIds();
-    }
-
-    internal interface IIdentityClaimGrainInternal : IIdentityClaimGrain
-    {
-        Task AddUserId(Guid id);
-
-        Task RemoveUserId(Guid id);
-    }
-
     internal class IdentityClaimGrain : Grain, IIdentityClaimGrainInternal
     {
         private readonly IPersistentState<HashSet<Guid>> _data;
 
         public IdentityClaimGrain(
-                    [PersistentState("IdentityClaim", OrleansIdentityConstants.OrleansStorageProvider)] IPersistentState<HashSet<Guid>> data)
+                    [PersistentState("IdentityClaim", OrleansIdentityConstants.OrleansStorageProvider)] 
+                    IPersistentState<HashSet<Guid>> data)
         {
             _data = data;
         }

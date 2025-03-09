@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Hosting;
 using Orleans.Hosting;
-using Orleans.Serialization;
 using Orleans.TestingHost;
 using System;
 using Xunit;
@@ -36,13 +35,7 @@ namespace Orleans.IdentityStore.Tests
         {
             public void Configure(ISiloBuilder siloBuilder)
             {
-                siloBuilder.UseOrleanIdentityStore();
-                siloBuilder.Services.AddSerializer(sb => 
-//                    sb.AddNewtonsoftJsonSerializer(
-                    sb.AddJsonSerializer(
-                        isSupported: type => type.Namespace.StartsWith("System.Security.Claims") || type.Namespace.StartsWith("Microsoft.AspNetCore.Identity")
-                    )
-                );
+                siloBuilder.UseMemoryOrleanIdentityStore();
             }
 
             public void Configure(IHostBuilder hostBuilder)
