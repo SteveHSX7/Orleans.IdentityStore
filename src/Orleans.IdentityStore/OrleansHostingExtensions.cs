@@ -22,9 +22,9 @@ namespace Orleans.Hosting
             builder.ConfigureServices(s => s.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>());
             try
             {
-                builder.AddMemoryGrainStorage(OrleansIdentityConstants.OrleansStorageProvider);
                 builder.AddAzureTableGrainStorage(OrleansIdentityConstants.OrleansStorageProvider, options =>
                 {
+                    // TODO : change to GetKeyedService (how?)
                     var connectionString = builder.Configuration.GetConnectionString(storageName);
                     options.TableServiceClient = new TableServiceClient(connectionString);
                 });
@@ -47,9 +47,9 @@ namespace Orleans.Hosting
             builder.ConfigureServices(s => s.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>());
             try
             {
-                builder.AddMemoryGrainStorage(OrleansIdentityConstants.OrleansStorageProvider);
                 builder.AddAzureBlobGrainStorage(OrleansIdentityConstants.OrleansStorageProvider, options =>
                 {
+                    // TODO : change to GetKeyedService (how?)
                     var connectionString = builder.Configuration.GetConnectionString(storageName);
                     options.BlobServiceClient = new BlobServiceClient(connectionString);
                 });
