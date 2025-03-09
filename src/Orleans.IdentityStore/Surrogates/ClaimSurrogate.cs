@@ -15,9 +15,9 @@ public sealed class ClaimConverter : IConverter<Claim, ClaimSurrogate>
 {
     public Claim ConvertFromSurrogate(
         in ClaimSurrogate surrogate) =>
-        new(surrogate.type, surrogate.value, surrogate.valueType, surrogate.issuer, surrogate.originalIssuer, surrogate.claimsIdentity);
+        new(type: surrogate.type, value: surrogate.value, valueType: surrogate.valueType, issuer: surrogate.issuer, originalIssuer: surrogate.originalIssuer, subject: surrogate.claimsIdentity);
 
     public ClaimSurrogate ConvertToSurrogate(
         in Claim value) =>
-        new(value.Type, value.Value, value.ValueType, value.Issuer, value.OriginalIssuer, value.Subject);
+        new(type: value.Type, value: value.Value, valueType: value.ValueType, issuer: value.Issuer, originalIssuer: value.OriginalIssuer, claimsIdentity: value.Subject);
 }
